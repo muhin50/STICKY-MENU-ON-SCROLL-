@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>
+STICKY MENU ON SCROLL!
+</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<style>
+
+.menu {background:#00a; color:#fff; height:40px; line-height:40px;letter-spacing:1px; width:100%;}
+
+
+.content{height: 2000px;background: red;}
+</style>
+</head>
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<body>
+ <header>
+  <div class="logo">STICKY MENU ON SCROLL!</div>
+  <div class="intro">Some dumbass tagline goes here</div>
+  <div class="menu">Menu goes here - home - links - blah blah</div>
+</header>
+
+<div class="content">
+ 
+</div>  
+
+
+<script>
+// Create a clone of the menu, right next to original.
+$('.menu').addClass('original').clone().insertAfter('.menu').addClass('cloned').css('position','fixed').css('top','0').css('margin-top','0').css('z-index','500').removeClass('original').hide();
+
+scrollIntervalID = setInterval(stickIt, 10);
+
+
+function stickIt() {
+
+  var orgElementPos = $('.original').offset();
+  orgElementTop = orgElementPos.top;               
+
+  if ($(window).scrollTop() >= (orgElementTop)) {
+    // scrolled past the original position; now only show the cloned, sticky element.
+
+    // Cloned element should always have same left position and width as original element.     
+    orgElement = $('.original');
+    coordsOrgElement = orgElement.offset();
+    leftOrgElement = coordsOrgElement.left;  
+    widthOrgElement = orgElement.css('width');
+    $('.cloned').css('left',leftOrgElement+'px').css('top',0).css('width',widthOrgElement).show();
+    $('.original').css('visibility','hidden');
+  } else {
+    // not scrolled past the menu; only show the original menu.
+    $('.cloned').hide();
+    $('.original').css('visibility','visible');
+  }
+}
+</script>
+</body>
+</html>
